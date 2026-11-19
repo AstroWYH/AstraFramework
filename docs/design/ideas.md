@@ -10,10 +10,16 @@ AI 也是这个项目的一部分。随着开发推进，我想把反复用到�
 
 ### 参考哪些框架
 
-最早明确想参考的有三家，后续可以按具体问题继续补充。比如做背包时，可以拿同一次“使用道具”操作作对照，看看界面从哪里发起请求、谁修改库存、变化又怎么通知界面。
+先从下面这些框架入手，后续按具体问题继续补充。比如做背包时，可以拿同一次“使用道具”操作作对照，看看界面从哪里发起请求、谁修改库存、变化又怎么通知界面。
 
 - **Game Framework（GF）**：看流程、事件、资源等通用模块如何划分，以及业务代码怎么使用这些模块。[官方仓库](https://github.com/EllanJiang/GameFramework)
 - **QFramework（QF）**：看一次操作怎样经过 Command、System 和 Model，再把数据变化传回界面。用同一个小功能体会这种分工的收益和成本。[官方仓库](https://github.com/liangxiegame/QFramework)
 - **XGEN**：结合自己用过的功能，记录哪些接口顺手、哪些修改牵涉的地方多，再拿这些实际经验和其他框架对照。
+- **ET** 用来研究客户端与服务端的协作。例如，联网使用道具时，客户端如何发请求，服务端在哪里校验库存，处理结果如何回到客户端。[官方仓库](https://github.com/egametang/ET)
+- **YooAsset** 用来研究资源加载和更新。例如，打开背包时如何加载道具图标，版本更新后又如何判断哪些资源需要重新下载。[官方仓库](https://github.com/tuyoogame/YooAsset)
 
-后续也可以围绕专题扩大范围。例如，做到客户端与服务端协作时可以看 ET，做到资源加载和更新时可以看 YooAsset。这些是待研究的候选，是否借鉴由届时的项目需求决定。[ET](https://github.com/egametang/ET) · [YooAsset](https://github.com/tuyoogame/YooAsset)
+### 接下来值得对照的项目
+
+- **TEngine** 把 YooAsset、HybridCLR 和 Luban 接进了同一个 Unity 客户端。可以沿着游戏启动流程读一遍，看看谁负责检查资源版本、下载更新、加载程序集，以及什么时候才把控制权交给游戏逻辑。[官方仓库](https://github.com/Alex-Rachel/TEngine)
+- **Luban** 适合研究配置工具链。拿一张道具表走一遍从编辑到 C# 读取的流程，尤其关注奖励引用了不存在的道具时，能在哪一步发现错误。[官方仓库](https://github.com/focus-creative-games/luban)
+- **VContainer** 适合研究依赖和对象生命周期。可以拿账号服务与战斗服务作对照，看看跨场景的服务由谁持有，一场战斗结束时又该释放哪些对象。[官方文档](https://vcontainer.hadashikick.jp/)
